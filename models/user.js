@@ -3,6 +3,7 @@ const Joi = require('joi');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const config = require('../config/config').get(process.env.NODE_ENV);
+const {app_DB} = require('../utils/startup/db')
 
 //const salt = 10;
 
@@ -32,7 +33,7 @@ const userSchema = new mongoose.Schema({
   phone: {
     type: String
   },
-  phone = {
+  phone: {
     type: String,
     
   },
@@ -113,6 +114,6 @@ function validateUser(user){
   return Joi.validate(user, schema)
 }
 
-const User = mongoose.model('User', userSchema)
+const User = app_DB.model('User', userSchema)
 
 module.exports = { User, validateUser }

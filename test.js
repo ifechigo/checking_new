@@ -26,15 +26,19 @@ const mongoose = require('mongoose')
 function ma(){
   mongoose.Promise = global.Promise
   var conn      = mongoose.createConnection('mongodb://localhost:27017/testA', {useNewUrlParser: true, useUnifiedTopology: true}, function(err) {
-    return err ? console.log(err) : console.log('database is established....')
+    return err ? console.log(err) : console.log('database is established A ....')
   });
-
+    return conn
+  }
+function ha(){ 
   var conn2     = mongoose.createConnection('mongodb://localhost:27017/testB', {useNewUrlParser: true, useUnifiedTopology: true}, function(err) {
-    return err ? console.log(err) : console.log('database is established....')
+    return err ? console.log(err) : console.log('database is established B....')
   })
-  return conn, conn2
+  return conn2
 }
-ma()
+
+const conn = ma()
+const conn2 = ha()
 
 
 // stored in 'testA' database

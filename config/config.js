@@ -10,8 +10,8 @@ const config = {
     SALT: 10,
     AXIOS_TOKEN: '',
     AXIOS_URL: 'https://sandbox.monnify.com/api/v1/bank-transfer/reserved-accounts',
-    TWILIO_SID: 'AC7e540106231e3e98cc9cb0b4052a187b',
-    TWILIO_TOKEN: '0ad111fccfbf00543838701255f22102'
+    TWILIO_SID: process.env.TWILIO_SID,
+    TWILIO_TOKEN: process.env.TWILIO_TOKEN
 
   }
 }

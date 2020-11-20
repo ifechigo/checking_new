@@ -1,9 +1,10 @@
 const express = require('express');
 const app = express();
-const db = require('./config/config').get(process.env.NODE_ENV);
-const mongoose = require('mongoose');
 
-require('./utils/startup/db')();
+const {app_DB, otp_DB} = require('./utils/startup/db');
+
+app_DB()
+otp_DB()
 require('./utils/startup/routes')(app)
 
 const port = process.env.PORT || 3008;

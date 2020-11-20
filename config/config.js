@@ -4,9 +4,9 @@ const config = {
     DATABASE: process.env.MONGODB_URL
   },
   default: {
-    SECRET: 'mysecretkey', //should be an enviroment variable
-    DATABASE: 'mongodb://localhost:27017/node-eight-user', //should be an enviroment variable
-    OTP_DATABASE = 'mongodb://localhost:27017/node-eight-otp',
+    SECRET: 'mysecretkey',
+    DATABASE: 'mongodb://localhost:27017/node-eight-user',
+    OTP_DATABASE: 'mongodb://localhost:27017/node-eight-otp',
     SALT: 10,
     AXIOS_TOKEN: '',
     AXIOS_URL: 'https://sandbox.monnify.com/api/v1/bank-transfer/reserved-accounts',

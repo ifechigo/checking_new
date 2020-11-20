@@ -1,7 +1,7 @@
 const verifyPhone = require('../utils/verifyPhone');
 const authLoggedIn = require('../middlewares/authLoggedIn');
 const express = require('express');
-const user = require('../models/user');
+const {User} = require('../models/user');
 const router = express.Router()
 const OTP = require('../models/oneTimePassword')
 
@@ -12,6 +12,12 @@ router.post('/verifyphonenumber', authLoggedIn, async (req, res) => {
 
   const otp = await verifyPhone(enteredPhoneNumber)
   
-  await user.otp = otp
+  const sent_otp = await new OTP(req.user)
+
+  sent_otp.save()
   
 })
+
+
+
+module.exports = router

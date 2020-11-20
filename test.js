@@ -46,6 +46,8 @@ var ModelA    = conn.model('Model', new mongoose.Schema({
   title : { type : String, default : 'model in testA database' }
 }));
 
+
+
 // stored in 'testB' database
 var ModelB    = conn2.model('Model', new mongoose.Schema({
   name: {

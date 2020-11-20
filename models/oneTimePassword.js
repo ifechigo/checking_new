@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const {otp_DB} = require('../utils/startup/db')
+const {oneTimePass_DB} = require('../utils/startup/db')
 
 const otpSchema = new mongoose.Schema({
   user_id: {
@@ -20,6 +20,6 @@ const otpSchema = new mongoose.Schema({
   }
 })
 
-const OTP = otp_DB.model('OTP', otpSchema);
+const OTP = oneTimePass_DB.model('OTP', otpSchema);
 
 module.exports = OTP

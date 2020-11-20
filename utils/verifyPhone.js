@@ -31,14 +31,5 @@ function verifyPhone(phone){
   .catch(err => console.log(err))
 }
 
-// client.message.create({
-//   body: `OTP:\n your otp is ${otp}`,
-//   to: '+23470742104854',
-//   from: '+13344234718'
-// })
-// .then((message) => console.log(message.sid))
-// .catch(err => console.log(err))
-
-verifyPhone('+2347042104854')
 
 module.exports = verifyPhone

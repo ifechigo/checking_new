@@ -3,9 +3,6 @@ const router = express.Router();
 
 const account = require('../utils/account');
 const authLoggedIn = require('../middlewares/authLoggedIn');
-const {User} = require('../models/user');
-const accountNumber = require('../../node7/utilities/accountNumber');
-const { route } = require('./users');
 
 
 router.post('/createaccount', authLoggedIn, async (req, res) => {
@@ -29,3 +26,5 @@ router.get('/myaccount', authLoggedIn, async (req, res) => {
     account_number: req.user.account
   })
 })
+
+module.exports = router

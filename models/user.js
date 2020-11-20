@@ -3,7 +3,7 @@ const Joi = require('joi');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const config = require('../config/config').get(process.env.NODE_ENV);
-const {app_DB} = require('../utils/startup/db')
+let {application_DB} = require('../utils/startup/db')
 
 //const salt = 10;
 
@@ -114,6 +114,6 @@ function validateUser(user){
   return Joi.validate(user, schema)
 }
 
-const User = app_DB.model('User', userSchema)
+const User = application_DB.model('User', userSchema)
 
 module.exports = { User, validateUser }

@@ -8,9 +8,9 @@ const authLoggedIn = require('../middlewares/authLoggedIn');
 router.post('/createaccount', authLoggedIn, async (req, res) => {
   const { firstname, lastname, _id, email} = req.user
 
-  await account(firstname, lastname, _id, email)
+  let accountNumber = await account(firstname, lastname, _id, email)
 
-  const accountnumber = accountNumber
+  accountnumber = accountNumber
 
   await user.findOneAndUpdate({$accountNumber: accountnumber})
 

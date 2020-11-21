@@ -1,52 +1,20 @@
+const twilio = require('twilio');
+
+const sid = config.TWILIO_SID;
+const token = config.TWILIO_TOKEN;
+
+const client = new twilio(sid, token)
 
 const mongoose = require('mongoose')
 
-// mongoose.Promise = global.Promise
-// mongoose.connect('mongodb://localhost:27017/delete-db-from-here', {useUnifiedTopology: true, useNewUrlParser: true}, function(err){ return err ? console.log(err) : console.log('database is connected........')})
-
-// const nameSchema = new mongoose.Schema({
-//   name: {
-//     default: 'ifechigo',
-//     type: String
-//   },
-//   expireAt: {
-//     type: Date,
-//     default: Date.now,
-//     index: {
-//       expires: 1000
-//     }
-//   }
-// })
-
-
-// const Name = mongoose.model('Name', nameSchema)
-
-// let name = new Name()
-// name.save(error => console.log(error))
-function ma(){
-  mongoose.Promise = global.Promise
-  var conn      = mongoose.createConnection('mongodb://localhost:27017/testA', {useNewUrlParser: true, useUnifiedTopology: true}, function(err) {
-    return err ? console.log(err) : console.log('database is established A ....')
-  });
-    return conn
-  }
 function ha(){ 
-  var conn2     = mongoose.createConnection('mongodb://localhost:27017/testB', {useNewUrlParser: true, useUnifiedTopology: true}, function(err) {
+  var conn2 = mongoose.createConnection('mongodb://localhost:27017/testB', {useNewUrlParser: true, useUnifiedTopology: true}, function(err) {
     return err ? console.log(err) : console.log('database is established B....')
   })
   return conn2
 }
 
-const conn = ma()
 const conn2 = ha()
-
-
-// stored in 'testA' database
-var ModelA    = conn.model('Model', new mongoose.Schema({
-  title : { type : String, default : 'model in testA database' }
-}));
-
-
 
 // stored in 'testB' database
 var ModelB    = conn2.model('Model', new mongoose.Schema({
@@ -54,17 +22,46 @@ var ModelB    = conn2.model('Model', new mongoose.Schema({
     default: 'ifechigo',
     type: String
   },
+  otp: {
+    type: String
+  },
   expireAt: {
     type: Date,
     default: Date.now,
     index: {
-      expires: 1000
+      expires: 3000
     }
   }
 }));
 
-let modela = new ModelA()
-let modelb = new ModelB()
+async function verifyPhone(phone, otp){
+  try{
+    const response = await client.messages.create({
+      body: `OTP:\n your otp is ${otp}`,
+      to: phone,
+      from: '+13344234718'
+    });
+    return console.log("=>",response.sid);
+    
+  }catch(error){ 
+    console.log(error);
+  }
+}
 
-modela.save()
-modelb.save()
+async function sendOTP(){
+  const mylist = [];
+  for(var i = 0; i < 6; i++){
+    let j = Math.floor(Math.random() * 10);
+    mylist.push(j);
+  }
+  let otp = mylist.join('')
+  verifyPhone('+2348159749599', otp);
+
+  let user = await new ModelB({
+    otp: otp
+  })
+
+  await user.save()
+}
+
+sendOTP()

@@ -5,7 +5,7 @@ const otpSchema = new mongoose.Schema({
   user_id: {
     type: String
   },
-  email: {
+  phone: {
     type: String
   },
   otp: {
@@ -15,7 +15,7 @@ const otpSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
     index: {
-      expires: '2m'
+      expires: '4m'
     }
   }
 })

@@ -10,7 +10,7 @@ router.post('/createaccount', authLoggedIn, async (req, res) => {
 
   let accountNumber = await account(firstname, lastname, _id, email)
 
-  accountnumber = accountNumber
+  let accountnumber = accountNumber
 
   await user.findOneAndUpdate({$accountNumber: accountnumber})
 
